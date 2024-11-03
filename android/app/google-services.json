@@ -1,44 +1,26 @@
 {
   "project_info": {
-    "project_number": "114008434039",
-    "project_id": "fir-note-9b3bd",
-    "storage_bucket": "fir-note-9b3bd.appspot.com"
+    "project_number": "27158884236",
+    "project_id": "fir-note-b8f25",
+    "storage_bucket": "fir-note-b8f25.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:114008434039:android:38dcd7d2dc78b70e036d72",
+        "mobilesdk_app_id": "1:27158884236:android:e14e82e1ecabdb1d7330a9",
         "android_client_info": {
           "package_name": "com.example.flutter_firebase_note"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "114008434039-qqhulp530p46e069cqfrdqcdm4t68hqj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.flutter_firebase_note",
-            "certificate_hash": "84a71baffe509f368301c3e3b3ed6b88d0b4c96b"
-          }
-        },
-        {
-          "client_id": "114008434039-2h5g8phiv0jut7q048phsdurj8cvq3qp.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyADQq-irulWzXd2Y3UHlu-XZzz5Q6MWbtQ"
+          "current_key": "AIzaSyBPlY3q34hakpucqT0SQTZldLweJ1bRB0M"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "114008434039-2h5g8phiv0jut7q048phsdurj8cvq3qp.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
