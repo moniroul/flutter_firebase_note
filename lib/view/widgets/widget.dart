@@ -86,7 +86,7 @@ Widget custom_text_from(
   Widget? sd,
   TextEditingController? ctr,
   Function? oneChangefn,
-  bool hide_text = true,
+  bool hide_text = false,
 }) {
   return TextField(
     controller: ctr,

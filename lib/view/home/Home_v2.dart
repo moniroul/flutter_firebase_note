@@ -3,14 +3,14 @@ import '../widgets/widget.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pinput/pinput.dart';
 
-class Page5 extends StatefulWidget {
-  const Page5({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _Page5State createState() => _Page5State();
+  _HomePageState createState() => _HomePageState();
 }
 // stop projact ui page
-class _Page5State extends State<Page5> {
+class _HomePageState extends State<HomePage> {
   final defaultPinTheme = PinTheme(
     width: 56,
     height: 60,

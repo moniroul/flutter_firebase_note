@@ -40,12 +40,13 @@ dependencies:
   cloud_firestore:
   firebase_storage:
   google_sign_in:
-  file_picker: 
+  file_picker:
   flutter_native_splash: ^2.4.1
   percent_indicator:
   pinput: ^5.0.0
   shared_preferences:
   get:
+  uuid:
 
 dev_dependencies:
   flutter_test:
@@ -89,7 +90,7 @@ flutter:
   fonts:
     - family: Urbanist
       fonts:
-       - asset: assets/fonts/Urbanist-VariableFont_wght.ttf
+        - asset: assets/fonts/Urbanist-VariableFont_wght.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

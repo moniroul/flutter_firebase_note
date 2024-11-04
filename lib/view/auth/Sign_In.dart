@@ -127,10 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 48,
                   child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: custom_ElevatedButton(() {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => SignUp()));
-                      }, 'Sign In')),
+                      child: custom_ElevatedButton(() {}, 'Sign In')),
                 ),
               ),
               SizedBox(
@@ -150,7 +147,10 @@ class _LoginPageState extends State<LoginPage> {
                           color: Color(0xFFF7E8CA0)),
                     ),
                     InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => SignUp()));
+                        },
                         child: Text(
                           'Sign Up',
                           style: TextStyle(

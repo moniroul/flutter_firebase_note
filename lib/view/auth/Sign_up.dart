@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_note/controller/authController.dart';
 import 'package:flutter_firebase_note/view/auth/Sign_In.dart';
 import 'package:flutter_firebase_note/view/auth/Sign_Up-Verify%20Code_Email.dart';
+import 'package:flutter_firebase_note/view/home/Home_v2.dart';
 import 'package:flutter_firebase_note/view/widgets/widget.dart';
+import 'package:get/get.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -11,6 +14,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final authCtr = Get.find<Authcontroller>();
+
   // Regular expression to check the conditions
 
   final RegExp regexnumber = RegExp(r'(?=.*[1-9])');
@@ -44,7 +49,6 @@ class _SignUpState extends State<SignUp> {
 
   // Variable add
 
-  TextEditingController passCtr = TextEditingController();
   String passText = "";
   bool numbrtCheck = false;
   bool upperCaseCheck = false;
@@ -88,8 +92,8 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.only(top: 60, left: 20),
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => LoginPage()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => LoginPage()));
                     },
                     child: Container(
                         height: 24,
@@ -159,7 +163,8 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Container(
-                  child: custom_text_from('Type your username', Icons.person),
+                  child: custom_text_from(
+                      ctr: authCtr.name, 'Type your username', Icons.person),
                 ),
               ),
               SizedBox(
@@ -168,8 +173,10 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Container(
-                  child:
-                      custom_text_from('Type your email', Icons.email_outlined),
+                  child: custom_text_from(
+                      ctr: authCtr.email,
+                      'Type your email',
+                      Icons.email_outlined),
                 ),
               ),
               SizedBox(
@@ -181,7 +188,7 @@ class _SignUpState extends State<SignUp> {
                     child: custom_text_from(
                   'Type your password',
                   Icons.lock_outline_rounded,
-                  ctr: passCtr,
+                  ctr: authCtr.password,
                   oneChangefn: (value) {
                     _validateInput(value);
                     setState(() {
@@ -189,6 +196,7 @@ class _SignUpState extends State<SignUp> {
                     });
                   },
                   sd: Icon(Icons.visibility_off),
+                  hide_text: true,
                 )),
               ),
               SizedBox(
@@ -218,12 +226,13 @@ class _SignUpState extends State<SignUp> {
                     padding: const EdgeInsets.only(left: 22),
                     child: Container(
                       child: Checkbox(
-                          activeColor:
-                              tramsContitionCheck ? Colors.green : Colors.grey,
-                          value: tramsContitionCheck,
+                          activeColor: authCtr.aggrement.value
+                              ? Colors.green
+                              : Colors.grey,
+                          value: authCtr.aggrement.value,
                           onChanged: (value) {
                             setState(() {
-                              tramsContitionCheck = value!;
+                              authCtr.aggrement.value = value!;
                             });
                           }),
                     ),
@@ -254,11 +263,10 @@ class _SignUpState extends State<SignUp> {
                   height: 48,
                   child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: custom_ElevatedButton(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => SignUpVerifyCodeEmail()));
+                      child: custom_ElevatedButton(() async {
+                        await authCtr.UserSignup();
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => HomePage()));
                       }, 'Sign Up')),
                 ),
               ),
