@@ -2,10 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_firebase_note/DatabaseService/authService.dart';
+import 'package:flutter_firebase_note/view/auth/Sign_In.dart';
 import 'package:flutter_firebase_note/view/home/Home_v2.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Authcontroller extends GetxController {
   TextEditingController name = TextEditingController();
@@ -35,6 +37,10 @@ class Authcontroller extends GetxController {
           "address": address.value,
         };
         authService.AuthDataSave(data, ctx);
+        email.clear();
+        password.clear();
+        name.clear();
+        Navigator.push(ctx, MaterialPageRoute(builder: (_) => LoginPage()));
       } else {
         print("Provide valid data ");
       }
@@ -52,24 +58,48 @@ class Authcontroller extends GetxController {
     }
   }
 
+  authSave() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setBool("isAuth", true);
+  }
+
   Future UserSignin(BuildContext ctx) async {
     try {
-      var res = await authService.Signin(email.text, password.text); 
+      var res = await authService.Signin(email.text, password.text);
       if (!res.user!.uid.isEmpty) {
+        await authSave();
         Navigator.push(ctx, MaterialPageRoute(builder: (_) => HomePage()));
+        email.clear();
+        password.clear(); 
       }
     } catch (e) {
       print(e);
       Fluttertoast.showToast(
           msg:
               "${e.toString().replaceAll("[firebase_auth/invalid-credential]", "")}",
-          toastLength: Toast.LENGTH_LONG,
+          toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
+          backgroundColor: const Color.fromARGB(255, 249, 111, 101),
           textColor: Colors.white,
           fontSize: 16.0);
     }
+  }
+
+  // [firebase_auth/invalid-credential] The supplied auth credential is incorrect, malformed or has expired.
+
+  authSignOut() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setBool("isAuth", false);
+  }
+
+  Future userLogout(BuildContext ctx) async {
+    await authService.Signout();
+    authSignOut();
+    Navigator.of(ctx).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => LoginPage()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   GoogleAuth() async {

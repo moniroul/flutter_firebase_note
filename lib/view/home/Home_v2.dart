@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
+import 'package:flutter_firebase_note/controller/authController.dart';
+import 'package:get/get.dart';
 import '../widgets/widget.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pinput/pinput.dart';
@@ -14,9 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    Future.delayed(Duration(microseconds: 0), () async {
-     
-    });
+    Future.delayed(Duration(microseconds: 0), () async {});
     super.initState();
   }
 
@@ -485,7 +485,9 @@ class _HomePageState extends State<HomePage> {
               width: 25,
             ),
             InkWell(
-              onTap: () {
+              onTap: () async {
+                final authCtr = Get.find<Authcontroller>();
+                await authCtr.userLogout(context);
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text('1 num ok')));
               },
