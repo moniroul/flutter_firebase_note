@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_firebase_note/view/home/Home_v2.dart';
 
 class AuthService {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -11,7 +13,7 @@ class AuthService {
     return user;
   }
 
-  Future Signin(String email, String password) async {
+  Future<UserCredential> Signin(String email, String password) async {
     var user =
         await auth.signInWithEmailAndPassword(email: email, password: password);
     return user;
@@ -21,7 +23,8 @@ class AuthService {
     await auth.signOut();
   }
 
-  Future AuthDataSave(Map<String, dynamic> data) async {
+  Future AuthDataSave(Map<String, dynamic> data, BuildContext ctx) async {
     await db.collection('users').doc().set(data);
+    Navigator.push(ctx, MaterialPageRoute(builder: (_) => HomePage()));
   }
 }

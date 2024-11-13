@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import '../widgets/widget.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pinput/pinput.dart';
@@ -9,8 +9,17 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
+
 // stop projact ui page
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    Future.delayed(Duration(microseconds: 0), () async {
+     
+    });
+    super.initState();
+  }
+
   final defaultPinTheme = PinTheme(
     width: 56,
     height: 60,

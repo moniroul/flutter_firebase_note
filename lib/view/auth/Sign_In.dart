@@ -90,8 +90,10 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Container(
-                  child:
-                      custom_text_from('Type your email', Icons.email_outlined),
+                  child: custom_text_from(
+                      ctr: autCtr.email,
+                      'Type your email',
+                      Icons.email_outlined),
                 ),
               ),
               SizedBox(
@@ -101,7 +103,9 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Container(
                     child: custom_text_from(
-                        'Type your password', Icons.lock_outline_rounded,
+                        ctr: autCtr.password,
+                        'Type your password',
+                        Icons.lock_outline_rounded,
                         sd: Icon(Icons.visibility_off))),
               ),
               SizedBox(
@@ -127,7 +131,9 @@ class _LoginPageState extends State<LoginPage> {
                   height: 48,
                   child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: custom_ElevatedButton(() {}, 'Sign In')),
+                      child: custom_ElevatedButton(() async {
+                        await autCtr.UserSignin(context);
+                      }, 'Sign In')),
                 ),
               ),
               SizedBox(

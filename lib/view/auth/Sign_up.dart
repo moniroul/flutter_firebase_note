@@ -264,9 +264,8 @@ class _SignUpState extends State<SignUp> {
                   child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: custom_ElevatedButton(() async {
-                        await authCtr.UserSignup();
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => HomePage()));
+                        await authCtr.UserSignup(context);
+                      
                       }, 'Sign Up')),
                 ),
               ),
@@ -280,7 +279,10 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     text('Have an account?', 14, FontWeight.w700, 0xFFF808D9E),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => LoginPage()));
+                      },
                       child: text('Sign In', 14, FontWeight.w700, 0xFFF0062FF),
                     ),
                   ],
