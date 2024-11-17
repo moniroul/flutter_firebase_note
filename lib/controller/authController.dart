@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_firebase_note/DatabaseService/authService.dart';
 import 'package:flutter_firebase_note/view/auth/Sign_In.dart';
 import 'package:flutter_firebase_note/view/home/Home_v2.dart';
+import 'package:flutter_firebase_note/view/home/Note_home_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -68,7 +69,7 @@ class Authcontroller extends GetxController {
       var res = await authService.Signin(email.text, password.text);
       if (!res.user!.uid.isEmpty) {
         await authSave();
-        Navigator.push(ctx, MaterialPageRoute(builder: (_) => HomePage()));
+        Navigator.push(ctx, MaterialPageRoute(builder: (_) => NoteHomePage()));
         email.clear();
         password.clear(); 
       }

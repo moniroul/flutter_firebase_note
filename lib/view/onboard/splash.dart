@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_note/view/auth/Sign_In.dart';
 import 'package:flutter_firebase_note/view/home/Home_v2.dart';
+import 'package:flutter_firebase_note/view/home/Note_home_page.dart';
 import 'package:flutter_firebase_note/view/onboard/Onboarding_1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,7 +28,8 @@ class _SplashState extends State<Splash> {
       Navigator.push(context, MaterialPageRoute(builder: (_) => Page1()));
     } else {
       if (sp.getBool("isAuth") != null && sp.getBool("isAuth") == true) {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => NoteHomePage()));
       } else {
         Navigator.push(context, MaterialPageRoute(builder: (_) => LoginPage()));
       }
