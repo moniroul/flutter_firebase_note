@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_firebase_note/DatabaseService/authService.dart';
 import 'package:flutter_firebase_note/view/auth/Sign_In.dart';
-import 'package:flutter_firebase_note/view/home/Home_v2.dart';
 import 'package:flutter_firebase_note/view/home/Note_home_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -59,8 +57,10 @@ class Authcontroller extends GetxController {
     }
   }
 
-  authSave() async {
+  authSave(UserCredential user) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setString("email", user.user!.email!);
+    sp.setString("uid", user.user!.uid);
     sp.setBool("isAuth", true);
   }
 
@@ -68,10 +68,10 @@ class Authcontroller extends GetxController {
     try {
       var res = await authService.Signin(email.text, password.text);
       if (!res.user!.uid.isEmpty) {
-        await authSave();
+        await authSave(res);
         Navigator.push(ctx, MaterialPageRoute(builder: (_) => NoteHomePage()));
         email.clear();
-        password.clear(); 
+        password.clear();
       }
     } catch (e) {
       print(e);

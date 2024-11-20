@@ -35,6 +35,7 @@ dependencies:
   pinput: 
   shared_preferences:
   get:
+  intl:
   uuid:
   path_provider:
   fluttertoast:  

@@ -14,7 +14,7 @@ Widget bubleImage(AssetImage? sanjid, {double? l}) {
 }
 
 Widget custom_NOTE_Card(double height, int maxLine,
-    {int? color, String? Health, String? may}) {
+    {int? color, String? Health, String? Description, String? may}) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -26,45 +26,53 @@ Widget custom_NOTE_Card(double height, int maxLine,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      Health!,
+                      maxLines: 1,
+                      style: TextStyle(
+                          fontFamily: 'Urbanist',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFFF000000)),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Text(
+                        Description != null ? Description : "no description",
+                        maxLines: (3 + maxLine),
+                        style: TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontSize: 14,
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFFF000000)),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    Health!,
-                    style: TextStyle(
-                        fontFamily: 'Urbanist',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFFF000000)),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'adipiscing elit. Donec adipiscing elit. Donecadipiscing elit. cing elit. Donec adipiscing elit. Donecadipiscing elitcing elit. Donec adipiscing elit. elit. Donec adipiscing elit. Donecadipiscing elit. cing elit. Donec adipiscing elit. Donecadipiscing elitcing elit. Donec adipiscing elit. Donecadipiscing elitDonecadipiscing elit. Donec',
-                    maxLines: (4 + maxLine),
-                    style: TextStyle(
-                        fontFamily: 'Urbanist',
-                        fontSize: 14,
-                        overflow: TextOverflow.ellipsis,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFFF000000)),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    may!,
-                    style: TextStyle(
-                        fontFamily: 'Urbanist',
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFFF000000)),
-                  ),
-                ],
+              padding: const EdgeInsets.symmetric(horizontal: 15 , vertical: 10),
+              child: Text(
+                may!,
+                style: TextStyle(
+                    fontFamily: 'Urbanist',
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFFF000000)),
               ),
             ),
           ],
