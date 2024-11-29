@@ -3,6 +3,7 @@ import 'package:flutter_firebase_note/controller/authController.dart';
 import 'package:flutter_firebase_note/controller/noteController.dart';
 import 'package:flutter_firebase_note/view/home/AddNote.dart';
 import 'package:flutter_firebase_note/view/home/Drowar.dart';
+import 'package:flutter_firebase_note/view/home/NoteDetails.dart';
 import 'package:flutter_firebase_note/view/widgets/widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -137,6 +138,12 @@ class _NoteHomePageState extends State<NoteHomePage> {
                           onTap: () {
                             print('hello');
                             print(noteCtr.notesdata[index]['time'].toString());
+                            noteCtr.SingleNorte.add(noteCtr.notesdata[index]);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => NoteDetails(),
+                                ));
                           },
                           child: Container(
                             margin: index == 1

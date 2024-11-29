@@ -13,6 +13,9 @@ class Notecontroller extends GetxController {
 
   final scrollPosition = 0.0.obs;
 
+
+final SingleNorte = <QueryDocumentSnapshot>[].obs;
+
   NoteService noteService = NoteService();
 
   final notesdata = [].obs;

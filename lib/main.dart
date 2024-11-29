@@ -9,6 +9,7 @@ void main() async {
   await Firebase.initializeApp();
 
   ControllerInit.Init();
+  
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: Splash(),
