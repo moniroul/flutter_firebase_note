@@ -8,12 +8,37 @@ class NoteService {
   }
 
   Future<List<QueryDocumentSnapshot>> noteGet(String userId) async {
-    QuerySnapshot snapshot = await db
-        .collection('notes')
-        .where('userId', isEqualTo: userId)
-        .orderBy('time', descending: true)
-        .snapshots().first;
+    try {
+      QuerySnapshot snapshot = await db
+          .collection('notes')
+          .where('userId', isEqualTo: userId)
+          .orderBy('time', descending: true)
+          .snapshots()
+          .first;
 
-    return snapshot.docs;
+      return snapshot.docs;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<bool> NoteUpdate(String id, Map<String, dynamic> data) async {
+    try {
+      await db.collection('notes').doc(id).update(data);
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future NoteDelete(String id) async {
+    try {
+      await db.collection('notes').doc(id).delete();
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 }

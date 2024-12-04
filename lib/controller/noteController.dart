@@ -13,19 +13,18 @@ class Notecontroller extends GetxController {
 
   final scrollPosition = 0.0.obs;
 
-
-final SingleNorte = <QueryDocumentSnapshot>[].obs;
+  final SingleNorte = <QueryDocumentSnapshot>[].obs;
 
   NoteService noteService = NoteService();
 
-  final notesdata = [].obs;
+  final notesdata = <QueryDocumentSnapshot>[].obs;
   final isLoading = false.obs;
   NoteGet() async {
     isLoading.value = true;
     SharedPreferences sp = await SharedPreferences.getInstance();
     String userId = await sp.getString('uid')!;
     var d = await noteService.noteGet(userId);
-    notesdata.value = d ;
+    notesdata.value = d;
     isLoading.value = false;
   }
 
@@ -43,7 +42,7 @@ final SingleNorte = <QueryDocumentSnapshot>[].obs;
       titleCtr.clear();
       noteCtr.clear();
       Fluttertoast.showToast(msg: "NoteSaved");
-      Navigator.pop(ctx!);
+      Navigator.pop(ctx);
     } else {
       Fluttertoast.showToast(msg: "Enter Title");
     }
@@ -60,6 +59,37 @@ final SingleNorte = <QueryDocumentSnapshot>[].obs;
 
     // Combine time and date
     return '$formattedTime $formattedDate';
+  }
+
+  final docID = ''.obs;
+  NoteUpdate(BuildContext ctx) async {
+    if (docID.value.length > 2) {
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      var data = {
+        'userId': sp.getString('uid'),
+        "title": titleCtr.text,
+        "note": noteCtr.text,
+        "time": FieldValue.serverTimestamp(),
+      };
+      var res = await noteService.NoteUpdate(docID.value, data);
+      if (res) {
+        Fluttertoast.showToast(msg: "Note Updated");
+        titleCtr.clear();
+        noteCtr.clear();
+        docID.value = '';
+        await NoteGet();
+        Navigator.pop(ctx);
+      } else {
+        Fluttertoast.showToast(msg: "Note Update Failed");
+      }
+    } else {
+      Fluttertoast.showToast(msg: "Select Note");
+    }
+  }
+
+  NoteDelete(String id) async {
+    await noteService.NoteDelete(id);
+    await NoteGet();
   }
 
   @override

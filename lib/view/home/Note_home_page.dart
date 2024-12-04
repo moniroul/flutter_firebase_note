@@ -137,6 +137,7 @@ class _NoteHomePageState extends State<NoteHomePage> {
                         return GestureDetector(
                           onTap: () {
                             print('hello');
+
                             print(noteCtr.notesdata[index]['time'].toString());
                             noteCtr.SingleNorte.add(noteCtr.notesdata[index]);
                             Navigator.push(
@@ -145,19 +146,42 @@ class _NoteHomePageState extends State<NoteHomePage> {
                                   builder: (_) => NoteDetails(),
                                 ));
                           },
-                          child: Container(
-                            margin: index == 1
-                                ? EdgeInsets.only(top: 30)
-                                : EdgeInsets.only(top: 0),
-                            child: custom_NOTE_Card(
-                              ((index % 4 + 1) * 44 + 200),
-                              MaxLine(index),
-                              color: 0xFFFE8F5FB,
-                              Description: noteCtr.notesdata[index]['note'],
-                              Health: noteCtr.notesdata[index]['title'],
-                              may: noteCtr.formatTimestamp(
-                                  noteCtr.notesdata[index]['time']),
-                            ),
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: index == 1
+                                    ? EdgeInsets.only(top: 30)
+                                    : EdgeInsets.only(top: 0),
+                                child: custom_NOTE_Card(
+                                  ((index % 4 + 1) * 44 + 200),
+                                  MaxLine(index),
+                                  color: 0xFFFE8F5FB,
+                                  Description: noteCtr.notesdata[index]['note'],
+                                  Health: noteCtr.notesdata[index]['title'],
+                                  may: noteCtr.formatTimestamp(
+                                      noteCtr.notesdata[index]['time']),
+                                ),
+                              ),
+                              TextButton(
+                                  onPressed: () async {
+                                    var data = noteCtr.notesdata[index];
+                                    noteCtr.docID.value = data.id;
+                                    noteCtr.titleCtr.text = data['title'];
+                                    noteCtr.noteCtr.text = data['note'];
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => AddNote(),
+                                        ));
+                                  },
+                                  child: Text("update Note")),
+                              TextButton(
+                                  onPressed: () async {
+                                    await noteCtr.NoteDelete(
+                                        noteCtr.notesdata[index].id);
+                                  },
+                                  child: Text("Delete Note")),
+                            ],
                           ),
                         );
                       }),

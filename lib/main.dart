@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_note/controller/contrllerInit.dart'; 
 import 'package:flutter_firebase_note/view/onboard/splash.dart'; 
 
-// add by russell
+ 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

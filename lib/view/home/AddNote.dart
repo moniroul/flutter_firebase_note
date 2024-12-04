@@ -40,9 +40,15 @@ class AddNote extends StatelessWidget {
                   maxLines: 5,
                 ),
                 custom_ElevatedButton(() async {
-                  print("object");
-                  await noteCtr.NoteDataSave(context);
-                }, 'Add Note'),
+                  if ((noteCtr.docID.value.length > 2)) {
+                    await noteCtr.NoteUpdate(context);
+                  } else {
+                    await noteCtr.NoteDataSave(context);
+                  }
+                },
+                    (noteCtr.docID.value.length > 2)
+                        ? "Update Note"
+                        : 'Add Note'),
               ],
             ),
           ),
